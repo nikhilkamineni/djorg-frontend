@@ -45,12 +45,13 @@ class App extends Component {
     axios // Get Notes from REST API
       .get('http://127.0.0.1:8000/api/notes/', config)
       .then(res => this.setState({ notes: [...res.data] }))
+      .then(() => this.getUser())
       .catch(err => console.log(`Error getting Notes: ${err}`));
 
-    axios // Get Tags from REST API
-      .get('http://127.0.0.1:8000/api/notetags/')
-      .then(res => this.setState({ noteTags: [...res.data] }))
-      .catch(err => console.log(`Error getting Tags: ${err}`));
+    // axios // Get Tags from REST API
+    //   .get('http://127.0.0.1:8000/api/notetags/')
+    //   .then(res => this.setState({ noteTags: [...res.data] }))
+    //   .catch(err => console.log(`Error getting Tags: ${err}`));
   };
 
   logoutHandler = () => {
@@ -61,7 +62,7 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('token')) {
       this.getNotes();
-      this.getUser();
+      // this.getUser();
     }
   }
 
