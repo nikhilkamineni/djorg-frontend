@@ -7,6 +7,8 @@ import Note from './components/note';
 
 import './App.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 /* STYLES */
 const AppStyles = {
   background: '#222222',
@@ -31,7 +33,7 @@ class App extends Component {
     };
 
     axios // Get Notes from REST API
-      .get('http://127.0.0.1:8000/api/users/', config)
+      .get(`${API_URL}api/users/`, config)
       .then(res => this.setState({ user: res.data[0] }))
       .catch(err => console.log(`Error getting Notes: ${err}`));
   };
@@ -43,7 +45,8 @@ class App extends Component {
     };
 
     axios // Get Notes from REST API
-      .get('http://127.0.0.1:8000/api/notes/', config)
+      // .get('http://127.0.0.1:8000/api/notes/', config)
+      .get(`${API_URL}api/notes/`, config)
       .then(res => this.setState({ notes: [...res.data] }))
       .then(() => this.getUser())
       .catch(err => console.log(`Error getting Notes: ${err}`));
